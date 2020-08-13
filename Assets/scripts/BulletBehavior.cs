@@ -23,8 +23,8 @@ public class BulletBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(gameObject.name + " onCollisionEnter2D " + collision.gameObject.name + "  " + collision.gameObject.tag);
-        if (collision.gameObject.name != "player")
+        //Debug.Log(gameObject.name + " onCollisionEnter2D " + collision.gameObject.name + "  " + collision.gameObject.tag);
+        if (collision.gameObject.tag != "Player")
         {
             Destroy(gameObject, 0.025f);
         }

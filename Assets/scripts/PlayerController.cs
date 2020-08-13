@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private static PlayerController playerControllerInstance;
+    public static PlayerController playerControllerInstance;
 
-    public int maxHP = 3;
+    public int maxHP;
     public int currentHP;
     
     void Awake()
@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        maxHP = 3;
         currentHP = maxHP;
     }
 
