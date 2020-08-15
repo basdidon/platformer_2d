@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController playerControllerInstance;
+    public static PlayerController instance;
 
     public int maxHP;
     public int currentHP;
     
     void Awake()
     {
-        playerControllerInstance = this;
+        instance = this;
     }
 
     void Start()
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         if (currentHP <= 0)
         {
             //death
+            
         }
     }
     
