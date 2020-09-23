@@ -6,10 +6,13 @@ public class BulletBehavior : MonoBehaviour
 {
     // Start is called before the first frame update\
     [SerializeField]
-    private float bulletSpeed = 5f;
+    private float bulletSpeed = 10f;
 
     [SerializeField]
     private Rigidbody2D bulletRigidbody;
+
+    [SerializeField]
+    private int bulletDamage = 1;
     void Start()
     {
         bulletRigidbody = GetComponent<Rigidbody2D>();
@@ -19,17 +22,6 @@ public class BulletBehavior : MonoBehaviour
     void FixedUpdate()
     {
         
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Debug.Log(gameObject.name + " onCollisionEnter2D " + collision.gameObject.name + "  " + collision.gameObject.tag);
-        if (collision.gameObject.tag != "Player")
-        {
-            Destroy(gameObject, 0.025f);
-        }
-        
-        //Destroy(gameObject, 0);
     }
 
     public void throwDirection(Vector2 direction)
@@ -44,6 +36,20 @@ public class BulletBehavior : MonoBehaviour
             bulletRigidbody.velocity = Vector2.left*bulletSpeed;
             Debug.Log("throwDirection_left");
 
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Enemy")
+        {
+            Destroy(gameObject, 0.0125f);
+            collision.GetComponent<EnemyHealthManager>().damageEnemy(bulletDamage);
+        }
+        
+        if(collision.tag == "Ground")
+        {
+            Destroy(gameObject, 0.0125f);
         }
     }
 }

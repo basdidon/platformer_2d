@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void dealDamage(int damage)
@@ -32,7 +32,8 @@ public class PlayerController : MonoBehaviour
         if (currentHP <= 0)
         {
             //death
-            
+            //Debug.Log("death");
+            gameObject.SetActive(false);
         }
     }
     

@@ -22,13 +22,12 @@ public class PlayerMovement : MonoBehaviour
     private float moveHorizontal;
 
     //jump variable
-    private int maxJump = 2;
-    private int jumpcount = 0;
-    private float nextJump = 0.0f;
-    private float jumpRate = 0.125f;
+    public int maxJump = 2;
+    public int jumpcount = 0;
+    public int jumpForce = 15;
 
     //fire variable
-    private float fireRate = 0.5f;
+    private float fireRate = 0.2f;
     private float nextFire = 0.0f;
 
     void Start()
@@ -37,6 +36,22 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update()
+    {
+        //jump
+        if (Input.GetButtonDown("Jump") && jumpcount < maxJump /*&& nextJump < Time.time*/)
+        {
+            jump();
+        }
+
+        //shoot
+
+        if (Input.GetButtonDown("Fire1") && nextFire < Time.time)
+        {
+            shoot();
+        }
+    }
+
     void FixedUpdate()
     {
         //horizontal move
@@ -54,18 +69,10 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        //jump
-        if (Input.GetButtonDown("Jump") && jumpcount < maxJump && nextJump < Time.time)
-        {
-            jump();
-        }
+        
 
-        //shoot
-        if (Input.GetButtonDown("Fire1") && nextFire < Time.time)
-        {
-            shoot();
-        }
-
+      
+        
         
         
 
@@ -84,10 +91,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void jump()
     {
-        playerRigidbody2d.velocity = new Vector3(0, 10, 0);
+        playerRigidbody2d.velocity = new Vector2(playerRigidbody2d.velocity.x, jumpForce);
         jumpcount = jumpcount + 1;
         Debug.Log("jump " + jumpcount);
-        nextJump = Time.time + jumpRate;
+        
     }
 
     private void shoot(){
