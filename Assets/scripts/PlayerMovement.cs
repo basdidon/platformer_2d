@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     // serializeField make private variable can edit by unity inspector
-
+    public static PlayerMovement instance;
 
     // object variable
     public GameObject bulletPrefab;
@@ -30,8 +30,13 @@ public class PlayerMovement : MonoBehaviour
     private float fireRate = 0.2f;
     private float nextFire = 0.0f;
 
+    //change bullet
+    public int currentBulletsID = 1;
+    public int i;
+
     void Start()
     {
+        instance = this;
         playerRigidbody2d = GetComponent<Rigidbody2D>();
     }
 
@@ -45,11 +50,17 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //shoot
-
         if (Input.GetButtonDown("Fire1") && nextFire < Time.time)
         {
             shoot();
         }
+
+        //change bullets
+        if (Input.GetButtonDown("Fire2"))
+        {
+            changeBullets();
+        }
+
     }
 
     void FixedUpdate()
@@ -68,14 +79,6 @@ public class PlayerMovement : MonoBehaviour
         } else {
 
         }
-
-        
-
-      
-        
-        
-        
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -97,20 +100,37 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    private void shoot(){
+    private void shoot()
+    {
+        i = currentBulletsID - 1;
 
-        if (facingRight)
+        if (Bullets.instance.currentBullets[i] > 0)
         {
-            GameObject bulletInstance = (GameObject)Instantiate(bulletPrefab, aim.position, aim.rotation);
-            bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.right);
-            Debug.Log("shoot_Right");
+            Bullets.instance.currentBullets[i]--;
+
+            if (facingRight)
+            {
+                GameObject bulletInstance = (GameObject)Instantiate(Bullets.instance.bulletPrefab[i], aim.position, aim.rotation);
+                bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.right);
+                Debug.Log("shoot_Right");
+            }
+            else
+            {
+                GameObject bulletInstance = (GameObject)Instantiate(Bullets.instance.bulletPrefab[i], aim.position, aim.rotation);
+                bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.left);
+                Debug.Log("shoot_Left");
+            }
+            nextFire = Time.time + fireRate;
         }
-        else
+    }
+
+    private void changeBullets()
+    {
+        currentBulletsID++;
+        if (currentBulletsID > Bullets.instance.bulletsID.Length)
         {
-            GameObject bulletInstance = (GameObject)Instantiate(bulletPrefab, aim.position, aim.rotation);
-            bulletInstance.GetComponent<BulletBehavior>().throwDirection(Vector2.left);
-            Debug.Log("shoot_Left");
+            currentBulletsID = 1;
         }
-        nextFire = Time.time + fireRate;
     }
 }
+
