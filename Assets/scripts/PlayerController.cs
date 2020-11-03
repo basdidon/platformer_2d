@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
         {
             //death
             //Debug.Log("death");
-            gameObject.SetActive(false);
+
+            LevelManager.instance.RespawnPlayer();
         }
     }
     
