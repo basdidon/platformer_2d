@@ -44,3 +44,30 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2909367125
+    locked: 0
+  - name: InroomBackground
+    uniqueID: 4023385333
+    locked: 0
+  - name: BackProp
+    uniqueID: 4065244001
+    locked: 0
+  - name: World
+    uniqueID: 2105212665
+    locked: 0
+  - name: object
+    uniqueID: 1667373305
+    locked: 0
+  - name: Enemy
+    uniqueID: 3753559525
+    locked: 0
+  - name: Player
+    uniqueID: 2757702021
+    locked: 0
+  - name: FrontProp
+    uniqueID: 23391461
+    locked: 0
+  - name: UI
+    uniqueID: 796841283
+    locked: 0
