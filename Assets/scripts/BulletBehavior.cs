@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-    [SerializeField]
-    private int bulletid;
-
+    // Start is called before the first frame update\
     [SerializeField]
     private float bulletSpeed = 10f;
 
@@ -14,9 +12,7 @@ public class BulletBehavior : MonoBehaviour
     private Rigidbody2D bulletRigidbody;
 
     [SerializeField]
-    private int bulletDamage = 2;
-    
-    // Start is called before the first frame update\
+    private int bulletDamage = 1;
     void Start()
     {
         bulletRigidbody = GetComponent<Rigidbody2D>();
@@ -47,12 +43,8 @@ public class BulletBehavior : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            if (bulletid == 0||bulletid == collision.GetComponent<EnemyHealthManager>().typeid)
-            {
-                Destroy(gameObject, 0.0125f);
-                collision.GetComponent<EnemyHealthManager>().damageEnemy(bulletDamage);
-            }
-            
+            Destroy(gameObject, 0.0125f);
+            collision.GetComponent<EnemyHealthManager>().damageEnemy(bulletDamage);
         }
         
         if(collision.tag == "Ground")

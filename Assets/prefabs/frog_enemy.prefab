@@ -144,8 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc0b01be7613d54490845aab6d6ccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeid: 3
-  EnemyHP: 3
   itemDrop: {fileID: 1432922801320673721, guid: 4777df18d6e44fa439ffd49dd87e2ae3,
     type: 3}
 --- !u!114 &1368216028725824697

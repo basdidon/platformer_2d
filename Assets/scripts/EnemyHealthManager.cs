@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class EnemyHealthManager : MonoBehaviour
 {
-    public int typeid = 3;
-
-    [SerializeField]
     private int EnemyHP = 3;
 
     public GameObject itemDrop;
     
-    
-    
+
     public void damageEnemy(int dmg)
     {
         EnemyHP -= dmg;
